@@ -8,12 +8,12 @@ public class MinPQ<key extends Comparable<key>> {
 		pq = (key[])new Comparable[M+1] ;
 	}
 	
-//	public MinPQ(key[] a){
-//		pq = (key[])new Comparable[a.length+1] ;
-//		for(int i=1;i<=a.length;i++){
-//			pq[i] = a[i-1];
-//		}
-//	}
+	public MinPQ(key[] a){
+		pq = (key[])new Comparable[a.length+1] ;
+		for(int i=0;i<a.length;i++){
+			insert(a[i]);
+		}
+	}
 	
 	public void insert(key v){
 		if(N == pq.length-1){

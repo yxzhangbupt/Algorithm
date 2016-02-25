@@ -76,13 +76,13 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
 		Item[] temp = (Item[])new Comparable[M];
 		int[] tempPQ = new int[M];
 		int[] tempQP = new int[M];
-		for(int i=0;i<keys.length;i++){
+		for(int i=0;i<N+1;i++){
 			temp[i] = keys[i];
 		}
-		for(int i=0;i<pq.length;i++){
+		for(int i=0;i<N+1;i++){
 			tempPQ[i] = pq[i];
 		}
-		for(int i=0;i<qp.length;i++){
+		for(int i=0;i<N+1;i++){
 			tempQP[i] = qp[i];
 		}
 		keys = temp;
@@ -109,7 +109,7 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
 	}
 	
 	private boolean less(int i,int j) {
-		return keys[pq[i]].compareTo(keys[qp[j]])<0;
+		return keys[pq[i]].compareTo(keys[pq[j]])<0;
 	}
 	
 	private void exch(int i,int j) {

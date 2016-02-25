@@ -1,7 +1,8 @@
 package com.algorithm.chapter2;
 
 public class IndexMinPQ<Item extends Comparable<Item>> {
-	int N = 0;
+	int M;
+	int N ;
 	private Item[] keys;
 	private int[] pq;
 	private int[] qp;
@@ -21,28 +22,28 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
 		N++;
 		pq[N] = k;
 		qp[k] = N;
-		keys[N] = item;
+		keys[k] = item;
 		swim(N);
 //		N++;
 	}
 	
 	public void change(int k,Item item){
-		keys[qp[k]] = item;
+		keys[k] = item;
 		swim(qp[k]);
 		sink(qp[k]);
 	}
 	
-	public void delelte(int k){
-		each(qp[k], N);
-		keys[N] = null;
-		qp[pq[N]] = -1;
-		N--;
-		sink(qp[k]);
-		swim(qp[k]);
+	public void delete(int k){
+		int index = qp[k];
+		exch(index, N--);
+		sink(index);
+		swim(index);
+		keys[k] = null;
+		qp[k] = -1;
 	}
 	
 	public Item min(){
-		return keys[1];
+		return keys[pq[1]];
 	}
 	
 	public int minIndex(){
@@ -53,7 +54,7 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
 	
 	public int delMin(){
 		int k = pq[1];
-		delelte(1);
+		delete(k);
 		if(N <= keys.length/4){
 			resize(keys.length/2);
 		}
@@ -91,7 +92,7 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
 	
 	private void swim(int k) {
 		while(k>1&&less(k, k/2)){
-			each(k/2, k);
+			exch(k/2, k);
 			k /= 2;
 		}
 	}
@@ -102,30 +103,23 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
 			if(j<N&&less(j+1, j))
 				j++;
 			if(!less(j, k)) break;
-			each(k, j);
+			exch(k, j);
 			k=j;
 		}
 	}
 	
 	private boolean less(int i,int j) {
-		return keys[i].compareTo(keys[j])<0;
+		return keys[pq[i]].compareTo(keys[qp[j]])<0;
 	}
 	
-	private void each(int i,int j) {
-		Item u;
-		int pqIndex,qpIndex;
-		u= keys[i];
-		keys[i] = keys[j];
-		keys[j] = u;
-		
-		pqIndex = pq[i];
+	private void exch(int i,int j) {
+		int temp;
+		temp = pq[i];
 		pq[i] = pq[j];
-		pq[j] = pqIndex;
+		pq[j] = temp;
 		
-		qpIndex = qp[i];
-		qp[i] = qp[j];
-		qp[j] = qpIndex;
-		
+		qp[pq[i]] = i;
+		qp[pq[j]] = j;
 		
 	}
 

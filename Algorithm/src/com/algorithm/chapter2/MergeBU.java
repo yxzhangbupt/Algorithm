@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class MergeBU {
 private static Comparable[] aux;
-	
+	//自底而上的归并排序
 	public static void merge(Comparable[] a,int lo,int mid,int hi){
 		int i = lo;
 		int j = mid + 1;

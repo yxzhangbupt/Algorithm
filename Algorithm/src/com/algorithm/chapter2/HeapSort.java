@@ -1,13 +1,18 @@
 package com.algorithm.chapter2;
-
+/*
+ * 堆排序
+ */
 public class HeapSort {
 	public static void sort(Comparable[] a){
 		int N = a.length;
+		//构建maxPQ
 		for(int k=N/2;k>=1;k--){
 			sink(a, k, N);
 		}
+		//将max放到最后并减小PQ的大小
 		while(N > 1){
-			each(a, 1, N--);
+			each(a, 1, N--); 
+			//恢复maxPQ
 			sink(a, 1, N);
 		}
 	}

@@ -15,8 +15,6 @@ public class Shell {
 			}
 			h /=3;
 		}
-		
-
 	}
 	
 	public static boolean less(Comparable v,Comparable w){

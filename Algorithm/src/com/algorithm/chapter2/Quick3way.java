@@ -30,30 +30,6 @@ public class Quick3way {
 		sort(a, gt+1, hi);
 	}
 	
-
-	
-	public static int partition(Comparable[] a,int lo,int hi){
-		int i = lo,j = hi + 1;
-		Comparable u = a[lo];
-		while(true){
-			while(less(a[++i],u)){
-				//由于一定有a[hi+1]>u,因此无需边界判断
-				if(i == hi)
-					break;
-			}
-			while(less(u,a[--j])){
-				//由于一定有a[lo]=u,因此无需边界判断
-//				if(j == lo)
-//					break;
-			}
-			if(i >= j){
-				break;
-			}
-			each(a, i, j);
-		}
-		each(a, lo, j);
-		return j;
-	}
 	public static boolean less(Comparable v,Comparable w){
 		return v.compareTo(w)<0;
 	}
